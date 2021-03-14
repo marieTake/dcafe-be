@@ -19,7 +19,7 @@ public class OrderDetails {
 	@Column(name="order_id")
 	private int orderId;
 	
-	@Column(name="menu_item_id")
+	@Column(name="menu_item_id")	
 	private int menuItemId;
 	
 	private int orderAmount;
@@ -28,7 +28,7 @@ public class OrderDetails {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id", nullable=false, insertable = false, updatable = false)
-	private Orders order;
+	private Orders orders;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="menu_item_id", nullable=false, insertable = false, updatable = false)
@@ -77,8 +77,12 @@ public class OrderDetails {
 	@Override
 	public String toString() {
 		return "OrderDetails [orderDetailsId=" + orderDetailsId + ", orderId=" + orderId + ", menuItemId=" + menuItemId
-				+ ", orderAmount=" + orderAmount + ", size=" + size + "]";
+				+ ", orderAmount=" + orderAmount + ", size=" + size + ", orders=" + orders + ", menuItem=" + menuItem
+				+ "]";
 	}
+
+	
+	
 	
 	
 

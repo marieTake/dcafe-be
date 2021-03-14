@@ -38,5 +38,11 @@ public class MenuItemController {
 		return repository.save(menuItem);
 	}
 	
+	@RequestMapping(value="/getmenuitemsbycategory/{id}")
+	public List<MenuItem> getMenuItemsByCategory(@PathVariable("id") int id){
+		return repository.findByCid(id);
+	}
+	
+	
 
 }

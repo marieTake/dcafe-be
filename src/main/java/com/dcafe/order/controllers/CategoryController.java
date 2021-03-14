@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dcafe.order.entities.Category;
+import com.dcafe.order.entities.CategoryTable;
 import com.dcafe.order.repos.CategoryRepository;
 
 @RestController
@@ -24,17 +24,17 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value="/getcategories", method=RequestMethod.GET)
-	public List<Category> getCategory(){
+	public List<CategoryTable> getCategory(){
 		return repository.findAll();
 	}
 	
 	@RequestMapping(value="/getcategory/{id}")
-	public Category getCategory(@PathVariable("id") int id) {
+	public CategoryTable getCategory(@PathVariable("id") int id) {
 		return repository.findById(id).get();
 	}
 	
 	@RequestMapping(value="/savecategory", method=RequestMethod.POST)
-	public Category saveCategory(@RequestBody Category category) {
+	public CategoryTable saveCategory(@RequestBody CategoryTable category) {
 		return repository.save(category);
 	}
 

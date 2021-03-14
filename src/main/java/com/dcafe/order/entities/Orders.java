@@ -1,27 +1,30 @@
 package com.dcafe.order.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Orders {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="order_id")
-	private int orderId;
+	private int oid;
 	
 	private String customerName;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderTime;
 	
 	private String comment;
@@ -30,15 +33,22 @@ public class Orders {
 	
 	private boolean eatinTakeout;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="order")
-	private List<OrderDetails> orderDetails;
+	private int shopId;
 	
-	public int getOrderId() {
-		return orderId;
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="orders")
+	private List<OrderDetails> orderDetails = new ArrayList<>();
+	
+	@PrePersist
+    public void onPrePersist() {
+        setOrderTime(new Date());
+    }
+	
+	public int getOid() {
+		return oid;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOid(int id) {
+		this.oid = id;
 	}
 
 	public String getCustomerName() {
@@ -81,11 +91,30 @@ public class Orders {
 		this.eatinTakeout = eatinTakeout;
 	}
 
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+	
+	public int getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
+	}
+
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", customerName=" + customerName + ", orderTime=" + orderTime
-				+ ", comment=" + comment + ", totalPrice=" + totalPrice + ", eatinTakeout=" + eatinTakeout + "]";
+		return "Orders [id=" + oid + ", customerName=" + customerName + ", orderTime=" + orderTime + ", comment="
+				+ comment + ", totalPrice=" + totalPrice + ", eatinTakeout=" + eatinTakeout + ", orderDetails="
+				+ orderDetails + "]";
 	}
+	
+	
 	
 	
 

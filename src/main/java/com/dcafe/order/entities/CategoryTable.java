@@ -3,25 +3,20 @@ package com.dcafe.order.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Category {
+public class CategoryTable {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="category_id")
 	private int categoryId;
 	
 	private String categoryName;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="category")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="categoryTable")
 	private List<MenuItem> menuItem;
 	
 	public int getCategoryId() {

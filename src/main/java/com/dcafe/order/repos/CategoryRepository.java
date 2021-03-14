@@ -2,8 +2,8 @@ package com.dcafe.order.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dcafe.order.entities.Category;
+import com.dcafe.order.entities.CategoryTable;
 
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface CategoryRepository extends JpaRepository<CategoryTable, Integer> {
 
 }

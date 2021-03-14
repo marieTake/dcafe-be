@@ -3,7 +3,6 @@ package com.dcafe.order.entities;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,7 @@ public class MenuItem {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="menu_item_id")
-	private int menuItemId;
+	private int miid;
 	
 	private String menuName;
 	
@@ -27,22 +25,25 @@ public class MenuItem {
 	
 	private String description;
 	
-	@Column(name="category_id")
-	private int categoryId;
+	private int cid;
+	
+	private String shop_admin_id;
+	
+	private int shop_id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="category_id", nullable=false, insertable = false, updatable = false)
-	private Category category;
+	@JoinColumn(name="cid", nullable=false, insertable = false, updatable = false)
+	private CategoryTable categoryTable;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="menuItem")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="menuItem")
 	private List<OrderDetails> orderDetails;
 
 	public int getMenuItemId() {
-		return menuItemId;
+		return miid;
 	}
 
 	public void setMenuItemId(int menuItemId) {
-		this.menuItemId = menuItemId;
+		this.miid = menuItemId;
 	}
 
 	public String getMenuName() {
@@ -68,19 +69,37 @@ public class MenuItem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public int getCategoryId() {
-		return categoryId;
+	
+	public String getShop_admin_id() {
+		return shop_admin_id;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setShop_admin_id(String shop_admin_id) {
+		this.shop_admin_id = shop_admin_id;
+	}
+
+	public int getCid() {
+		return cid;
+	}
+
+	public void setCidd(int categoryId) {
+		this.cid = categoryId;
+	}
+	
+	public int getShop_id() {
+		return shop_id;
+	}
+
+	public void setShop_id(int shop_id) {
+		this.shop_id = shop_id;
+
 	}
 
 	@Override
 	public String toString() {
-		return "MenuItem [menuItemId=" + menuItemId + ", menuName=" + menuName + ", price=" + price + ", description="
-				+ description + ", categoryId=" + categoryId + "]";
+		return "MenuItem [miid=" + miid + ", menuName=" + menuName + ", price=" + price + ", description=" + description
+				+ ", cid=" + cid + ", shop_admin_id=" + shop_admin_id + ", shop_id=" + shop_id + ", category="
+				+ categoryTable + ", orderDetails=" + orderDetails + "]";
 	}
 	
 	

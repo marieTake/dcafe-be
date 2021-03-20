@@ -3,14 +3,17 @@ package com.dcafe.order.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ShopUser {
-	
+@Table(name="shop_user")
+public class ShopUser{
+
 	@Id
 	@Column(name="shop_admin_id")
 	private String shopAdminId;
@@ -24,7 +27,8 @@ public class ShopUser {
 	
 	private String userEmail;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shop_id", referencedColumnName = "sid", nullable=false, insertable = false, updatable = false)
 	public ShopAdmin shopAdmin;
 
@@ -76,14 +80,6 @@ public class ShopUser {
 		this.shopAdmin = shopadmin;
 	}
 
-	@Override
-	public String toString() {
-		return "ShopUser [shopAdminIdd=" + shopAdminId + ", password=" + password + ", shopName=" + shopName
-				+ ", shopId=" + shopId + ", userEmail=" + userEmail + ", shopadmin=" + shopAdmin + "]";
-	}
-
 	
-	
-
 	
 }

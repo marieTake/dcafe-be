@@ -1,20 +1,24 @@
 package com.dcafe.order.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="shop_admin")
-public class ShopAdmin {
-	
+public class ShopAdmin{
+
 	@Id
 	private int sid;
 	
 	private String shopName;
 
-	@OneToOne(mappedBy = "shopAdmin")
+	@JsonIgnore
+	@OneToOne(mappedBy = "shopAdmin", fetch=FetchType.LAZY)
 	private ShopUser shopUser;
 	
 	public int getSid() {
@@ -43,7 +47,7 @@ public class ShopAdmin {
 
 	@Override
 	public String toString() {
-		return "ShopAdmin [sid=" + sid + ", shopName=" + shopName + ", shopuser=" + shopUser + "]";
+		return "ShopAdmin [sid=" + sid + ", shopName=" + shopName + ", shopUser=" + shopUser + "]";
 	}
 
 	

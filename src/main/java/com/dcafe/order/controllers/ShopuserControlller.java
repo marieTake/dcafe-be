@@ -3,13 +3,11 @@ package com.dcafe.order.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dcafe.order.dto.ShopUserLoginRequest;
@@ -44,14 +42,13 @@ public class ShopuserControlller {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public Boolean login(@RequestBody ShopUserLoginRequest loginRequest) {
+	public Shopuser login(@RequestBody ShopUserLoginRequest loginRequest) {
 		Shopuser user = shopUserRepository.findByShopAdminId(loginRequest.getShopAdminId());
 		if(user.getPassword().equals(loginRequest.getPassword())){
-			return true;
+			return shopUserRepository.findByShopAdminId(loginRequest.getShopAdminId());
 		}else {
-			return false;
+			return null;
 		}
 	}
-	
 	
 }

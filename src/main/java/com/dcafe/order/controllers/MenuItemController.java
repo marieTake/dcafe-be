@@ -45,6 +45,16 @@ public class MenuItemController {
 		return repository.findByCid(id);
 	}
 	
+	@RequestMapping(value="/getmenuitemsbyshop/{shopid}", method=RequestMethod.GET)
+	public List<MenuItem> getMenuItemsByShop(@PathVariable("shopid") int shopid){
+		return repository.findByShopId(shopid);
+	}
+	
+	@RequestMapping(value="/getmenuitemsbycategoryandshop/{categoryId}/{shopid}", method=RequestMethod.GET)
+	public List<MenuItem> getMenuItemsByCategoryAndShop(@PathVariable("categoryId") int id, @PathVariable("shopid") int shopid){
+		return repository.findByShopIdAndCid(shopid, id);
+	}
+	
 	
 
 }

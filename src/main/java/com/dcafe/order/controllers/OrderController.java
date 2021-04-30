@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dcafe.order.dto.ConfirmationEmail;
 import com.dcafe.order.entities.OrderDetails;
 import com.dcafe.order.entities.Orders;
 import com.dcafe.order.repos.OrderDetailsRepository;
 import com.dcafe.order.repos.OrdersRepository;
+import com.dcafe.order.util.EmailUtil;
 
 @RestController
 @CrossOrigin
@@ -23,6 +25,8 @@ public class OrderController {
 	
 	private OrdersRepository repository;
 	private OrderDetailsRepository orderDetailsRepository;
+	@Autowired
+	private EmailUtil emailUtil;
 	
 	@Autowired
 	OrderController(OrdersRepository repository, OrderDetailsRepository orderDetailsRepository){
@@ -42,7 +46,7 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(value="/saveorder", method=RequestMethod.POST)
-	public String saveOrder(@RequestBody Orders request) {
+	public void saveOrder(@RequestBody Orders request) {
 		System.out.println("Orders: "+request.toString());
 		Orders order=repository.save(request);
 		List<OrderDetails> listofdetails = request.getOrderDetails();
@@ -51,7 +55,11 @@ public class OrderController {
 			OrderDetails saved = orderDetailsRepository.save(orderdetail);
 			System.out.println(order);
 			System.out.println(saved);
-		}
-        return "saved";  
+		}  
+	}
+	
+	@RequestMapping(value="/sendEmail", method=RequestMethod.POST)
+	public void sendEmail(@RequestBody ConfirmationEmail confirmationEmail) {
+		emailUtil.sendItinerary(confirmationEmail.getEmail());
 	}
 }

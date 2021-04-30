@@ -13,19 +13,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ShopAdmin{
 
 	@Id
-	private int sid;
+	private String sid;
 	
 	private String shopName;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "shopAdmin", fetch=FetchType.LAZY)
-	private ShopUser shopUser;
-	
-	public int getSid() {
+	public String getSid() {
 		return sid;
 	}
 
-	public void setSid(int shopId) {
+	public void setSid(String shopId) {
 		this.sid = shopId;
 	}
 
@@ -36,22 +32,11 @@ public class ShopAdmin{
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-	
-	public ShopUser getShopUser() {
-		return shopUser;
-	}
-
-	public void setShopUser(ShopUser shopUser) {
-		this.shopUser = shopUser;
-	}
 
 	@Override
 	public String toString() {
-		return "ShopAdmin [sid=" + sid + ", shopName=" + shopName + ", shopUser=" + shopUser + "]";
+		return "ShopAdmin [sid=" + sid + ", shopName=" + shopName + "]";
 	}
-
-	
-	
 	
 	
 

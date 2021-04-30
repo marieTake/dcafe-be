@@ -1,35 +1,26 @@
 package com.dcafe.order.entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="shop_user")
-public class ShopUser{
+public class Shopuser{
 
 	@Id
-	@Column(name="shop_admin_id")
 	private String shopAdminId;
 	
 	private String password;
 	
 	private String shopName;
 	
-	@Column(name="shop_id")
-	private int shopId;
+	private String shopId;
 	
 	private String userEmail;
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shop_id", referencedColumnName = "sid", nullable=false, insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "shopId", referencedColumnName = "sid", nullable=false, insertable = false, updatable = false)
 	public ShopAdmin shopAdmin;
 
 	public String getShopAdminId() {
@@ -56,11 +47,11 @@ public class ShopUser{
 		this.shopName = shopName;
 	}
 
-	public int getShopId() {
+	public String getShopId() {
 		return shopId;
 	}
 
-	public void setShopId(int shopId) {
+	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
 
@@ -80,6 +71,5 @@ public class ShopUser{
 		this.shopAdmin = shopadmin;
 	}
 
-	
 	
 }

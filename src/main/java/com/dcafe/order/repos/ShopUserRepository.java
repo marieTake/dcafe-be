@@ -2,10 +2,10 @@ package com.dcafe.order.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dcafe.order.entities.ShopUser;
+import com.dcafe.order.entities.Shopuser;
 
-public interface ShopUserRepository extends JpaRepository<ShopUser, Integer> {
+public interface ShopUserRepository extends JpaRepository<Shopuser, Integer> {
 	
-	public ShopUser findByShopAdminId(String sai);
+	public Shopuser findByShopAdminId(String sai);
 
 }

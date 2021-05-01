@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.expression.ParseException;
 
-public class CommonUtill {
+public class DateFormatUtill {
 	
 	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	 

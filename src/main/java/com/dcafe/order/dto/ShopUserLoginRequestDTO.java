@@ -1,6 +1,6 @@
 package com.dcafe.order.dto;
 
-public class ShopUserLoginRequest {
+public class ShopUserLoginRequestDTO {
 
 	private String shopAdminId;
 	private String password;

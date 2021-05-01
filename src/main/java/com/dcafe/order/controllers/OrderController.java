@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dcafe.order.dto.ConfirmationEmail;
+import com.dcafe.order.dto.DisplayOrderDetailsDTO;
 import com.dcafe.order.entities.OrderDetails;
 import com.dcafe.order.entities.Orders;
 import com.dcafe.order.repos.OrderDetailsRepository;
 import com.dcafe.order.repos.OrdersRepository;
+import com.dcafe.order.services.OrderService;
 import com.dcafe.order.util.EmailUtil;
 
 @RestController
@@ -27,6 +28,8 @@ public class OrderController {
 	private OrderDetailsRepository orderDetailsRepository;
 	@Autowired
 	private EmailUtil emailUtil;
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	OrderController(OrdersRepository repository, OrderDetailsRepository orderDetailsRepository){
@@ -46,7 +49,8 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(value="/saveorder", method=RequestMethod.POST)
-	public void saveOrder(@RequestBody Orders request) {
+	public DisplayOrderDetailsDTO saveOrder(@RequestBody Orders request) {
+		//save order
 		System.out.println("Orders: "+request.toString());
 		Orders order=repository.save(request);
 		List<OrderDetails> listofdetails = request.getOrderDetails();
@@ -56,10 +60,15 @@ public class OrderController {
 			System.out.println(order);
 			System.out.println(saved);
 		}  
+		
+		//return ordered details to display
+		DisplayOrderDetailsDTO displayOrderDetails = orderService.createDisplayOrderDetails(order, listofdetails);
+		
+		return displayOrderDetails;
 	}
 	
 	@RequestMapping(value="/sendEmail", method=RequestMethod.POST)
-	public void sendEmail(@RequestBody ConfirmationEmail confirmationEmail) {
-		emailUtil.sendItinerary(confirmationEmail.getEmail());
+	public void sendEmail(@RequestBody DisplayOrderDetailsDTO displayOrderDetailsDto) {
+		emailUtil.sendItinerary(displayOrderDetailsDto);
 	}
 }

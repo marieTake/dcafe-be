@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dcafe.order.dto.ShopUserLoginRequest;
+import com.dcafe.order.dto.ShopUserLoginRequestDTO;
 import com.dcafe.order.entities.Shopuser;
 import com.dcafe.order.repos.ShopUserRepository;
 
@@ -42,7 +42,7 @@ public class ShopuserControlller {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public Shopuser login(@RequestBody ShopUserLoginRequest loginRequest) {
+	public Shopuser login(@RequestBody ShopUserLoginRequestDTO loginRequest) {
 		Shopuser user = shopUserRepository.findByShopAdminId(loginRequest.getShopAdminId());
 		if(user.getPassword().equals(loginRequest.getPassword())){
 			return shopUserRepository.findByShopAdminId(loginRequest.getShopAdminId());

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2 style="margin-bottom: 20px;" th:inline="text">Hello,
+		[[${customerName}]]!</h2>
+	<p>
+		Thank your ordering with us.<br />
+		Please find your order confirmation below.
+	</p>
+	<br />
+	<p>Your Order Details:</p>
+	<table style="margin: 10px 30px 0px 0px; padding: 0px; border: solid 1px #666; border-spacing: 0; font: small/1.5 Arial, Helvetica, sans-serif;">
+		<tr style="text-align: center;">
+			<td style="width: 150px; background: #65ace4; color: #fff; padding: 3px 5px; border-bottom: solid 1px #666; border-right: solid 1px #fff;">Item</td>
+			<td style="width: 50px; background: #65ace4; color: #fff; padding: 3px 5px; border-bottom: solid 1px #666; border-right: solid 1px #666;">Amount</td>
+			<td style="width: 50px; background: #65ace4; color: #fff; padding: 3px 5px; border-bottom: solid 1px #666; border-right: solid 1px #666;">Price</td>
+		</tr>
+		<tr th:each="orderedItems : ${orderedItems}">
+			<td style="padding: 3px 5px; border-bottom: dotted 1px #666; text-align: center; border-right: solid 1px #000;"
+				th:text="${orderedItems.menuItem}"></td>
+			<td style="padding: 3px 5px; border-bottom: dotted 1px #666; text-align: left; border-right: solid 1px #000;"
+				th:text="${orderedItems.amount}"></td>
+			<td style="padding: 3px 5px; border-bottom: dotted 1px #666; text-align: right; border-right: solid 1px #000;"
+				th:text="${orderedItems.price}"></td>
+		</tr>
+	</table>
+	<p>TOTAL PRICE:[[${totalPrice}]]</p>
+</body>
+</html>

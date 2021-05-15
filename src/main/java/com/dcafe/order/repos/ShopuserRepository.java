@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.dcafe.order.entities.Shopuser;
 
-public interface ShopUserRepository extends JpaRepository<Shopuser, Integer> {
+public interface ShopuserRepository extends JpaRepository<Shopuser, Integer> {
 	
-	public Shopuser findByShopAdminId(String sai);
+	public Shopuser findByShopUserId(String shopUserId);
 
 }

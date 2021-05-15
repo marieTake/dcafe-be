@@ -2,15 +2,15 @@ package com.dcafe.order.dto;
 
 public class ShopUserLoginRequestDTO {
 
-	private String shopAdminId;
+	private String shopUserId;
 	private String password;
 
-	public String getShopAdminId() {
-		return shopAdminId;
+	public String getShopUserId() {
+		return shopUserId;
 	}
 
-	public void setShopAdminId(String shopAdminId) {
-		this.shopAdminId = shopAdminId;
+	public void setShopUserId(String shopUserId) {
+		this.shopUserId = shopUserId;
 	}
 
 	public String getPassword() {

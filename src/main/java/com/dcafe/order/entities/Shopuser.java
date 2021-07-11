@@ -3,6 +3,7 @@ package com.dcafe.order.entities;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,7 +28,7 @@ public class Shopuser{
 	@JoinColumn(name = "shopId", referencedColumnName = "sid", nullable=false, insertable = false, updatable = false)
 	private ShopAdmin shopAdmin;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<Role> roles;
 

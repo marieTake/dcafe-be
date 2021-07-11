@@ -27,9 +27,7 @@ public class MenuItem {
 	
 	private int cid;
 	
-	private String shopAdminId;
-	
-	private int shopId;
+	private String shopId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cid", nullable=false, insertable = false, updatable = false)
@@ -69,14 +67,6 @@ public class MenuItem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getShopAdminIsd() {
-		return shopAdminId;
-	}
-
-	public void setShopAdminAd(String shopAdminAd) {
-		this.shopAdminId = shopAdminAd;
-	}
 
 	public int getCid() {
 		return cid;
@@ -86,11 +76,11 @@ public class MenuItem {
 		this.cid = categoryId;
 	}
 	
-	public int getShopId() {
+	public String getShopId() {
 		return shopId;
 	}
 
-	public void setShopId(int shopId) {
+	public void setShopId(String shopId) {
 		this.shopId = shopId;
 
 	}
@@ -98,10 +88,8 @@ public class MenuItem {
 	@Override
 	public String toString() {
 		return "MenuItem [miid=" + miid + ", menuName=" + menuName + ", price=" + price + ", description=" + description
-				+ ", cid=" + cid + ", shopIdmind=" + shopAdminId + ", shopd=" + shopId + ", category="
-				+ categoryTable + ", orderDetails=" + orderDetails + "]";
+				+ ", cid=" + cid + ", shopId=" + shopId + ", categoryTable=" + categoryTable + ", orderDetails="
+				+ orderDetails + "]";
 	}
-	
-	
 
 }

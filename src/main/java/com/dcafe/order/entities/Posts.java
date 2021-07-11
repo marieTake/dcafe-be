@@ -26,7 +26,7 @@ public class Posts {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date postedDate;
 	
-	private String shopAdminId;
+	private String shopId;
 	
 	@PrePersist
     public void onPrePersist() {
@@ -66,22 +66,20 @@ public class Posts {
 	}
 
 
-	public String getShopAdminId() {
-		return shopAdminId;
+	public String getShopId() {
+		return shopId;
 	}
 
-	public void setShopAdminId(String shopAdminId) {
-		this.shopAdminId = shopAdminId;
+	public void setShopId(String shopId) {
+		this.shopId = shopId;
 	}
 
 	@Override
 	public String toString() {
 		return "Posts [postsId=" + postsId + ", title=" + title + ", body=" + body + ", postedDate=" + postedDate
-				+ ", shopAdminId=" + shopAdminId + "]";
+				+ ", shopId=" + shopId + "]";
 	}
-	
-	
-	
+
 	
 
 }

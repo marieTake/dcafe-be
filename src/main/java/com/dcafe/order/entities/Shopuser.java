@@ -1,15 +1,20 @@
 package com.dcafe.order.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Shopuser{
 
 	@Id
-	private String shopAdminId;
+	private String shopUserId;
 	
 	private String password;
 	
@@ -21,14 +26,26 @@ public class Shopuser{
 	
 	@OneToOne
 	@JoinColumn(name = "shopId", referencedColumnName = "sid", nullable=false, insertable = false, updatable = false)
-	public ShopAdmin shopAdmin;
+	private ShopAdmin shopAdmin;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+	private Set<Role> roles;
 
-	public String getShopAdminId() {
-		return shopAdminId;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setShopAdminId(String shopAdminId) {
-		this.shopAdminId = shopAdminId;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getShopUserId() {
+		return shopUserId;
+	}
+
+	public void setShopUserId(String shopUserId) {
+		this.shopUserId = shopUserId;
 	}
 
 	public String getPassword() {

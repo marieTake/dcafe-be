@@ -51,14 +51,11 @@ public class OrderController {
 	@RequestMapping(value="/saveorder", method=RequestMethod.POST)
 	public DisplayOrderDetailsDTO saveOrder(@RequestBody Orders request) {
 		//save order
-		System.out.println("Orders: "+request.toString());
 		Orders order=repository.save(request);
 		List<OrderDetails> listofdetails = request.getOrderDetails();
 		for(OrderDetails orderdetail : listofdetails) {
 			orderdetail.setOrderId(order.getOid());
 			OrderDetails saved = orderDetailsRepository.save(orderdetail);
-			System.out.println(order);
-			System.out.println(saved);
 		}  
 		
 		//return ordered details to display

@@ -33,7 +33,7 @@ public class Orders {
 	
 	private boolean eatinTakeout;
 	
-	private int shopId;
+	private String shopId;
 	
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="orders")
 	private List<OrderDetails> orderDetails = new ArrayList<>();
@@ -99,23 +99,20 @@ public class Orders {
 		this.orderDetails = orderDetails;
 	}
 	
-	public int getShopId() {
+	public String getShopId() {
 		return shopId;
 	}
 
-	public void setShopId(int shopId) {
+	public void setShopId(String shopId) {
 		this.shopId = shopId;
 	}
 
 	@Override
 	public String toString() {
-		return "Orders [id=" + oid + ", customerName=" + customerName + ", orderTime=" + orderTime + ", comment="
-				+ comment + ", totalPrice=" + totalPrice + ", eatinTakeout=" + eatinTakeout + ", orderDetails="
-				+ orderDetails + "]";
+		return "Orders [oid=" + oid + ", customerName=" + customerName + ", orderTime=" + orderTime + ", comment="
+				+ comment + ", totalPrice=" + totalPrice + ", eatinTakeout=" + eatinTakeout + ", shopId=" + shopId
+				+ ", orderDetails=" + orderDetails + "]";
 	}
-	
-	
-	
 	
 
 }
